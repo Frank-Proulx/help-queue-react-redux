@@ -8,6 +8,8 @@ import PropTypes from "prop-types";
 import * as a from './../actions'
 import { withFirestore } from 'react-redux-firebase';
 
+// remove mainTicketList (from all?)
+
 class TicketControl extends React.Component {
 
   constructor(props) {
@@ -76,9 +78,7 @@ class TicketControl extends React.Component {
   }
 
   handleDeletingTicket = (id) => {
-    const { dispatch } = this.props;
-    const action = a.deleteTicket(id);
-    dispatch(action);
+    this.props.firestore.delete({collection: 'tickets', doc: id})
     this.setState({selectedTicket: null});
   }
 
